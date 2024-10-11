@@ -21,7 +21,7 @@ def criarConexao():
 
 def login(usuario, senha):
     conexao = criarConexao()
-    if conexao == None:
+    if conexao is None:
         return "Erro de conexão"
     else:
         cursor = conexao.cursor()

@@ -1,3 +1,4 @@
 # ignorar a .venv
 .venv
 __pycache__
+password.py

@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request
-from bd import login
+from bd import login, buscarProdutos
+from datetime import datetime
 
 app = Flask(__name__)
 user = {}
@@ -30,6 +31,11 @@ def logout():
     global user
     user = {}
     return redirect('/')
+
+@app.route('/area/<int:area>')
+def areas(area):
+    produtos = buscarProdutos(area)
+    return render_template('area.html', produtos=produtos, area=area, data=datetime.now().date())
 
 if __name__ == '__main__':
     app.run(debug=True)

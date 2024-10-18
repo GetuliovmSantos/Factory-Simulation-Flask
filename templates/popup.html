@@ -4,27 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-
+    <title>Concluir Venda</title>
 </head>
 
 <body>
     <script>
-        function popup(venda) {
-            if (venda == 'True') {
+        // Função que exibe um popup baseado no status da venda
+        function popup(sale) {
+            // Verifica se a venda foi bem-sucedida
+            if (sale == 'True') {
+                // Exibe uma mensagem de sucesso
                 alert("Venda realizada com sucesso");
-                // redirecionar para a pagina de armazem
-                window.location.href = "/armazem";
+                
             } else {
+                // Exibe uma mensagem de erro
                 alert("Erro ao realizar a venda");
-                window.location.href = "/armazem";
             }
+            // Redireciona para a página de armazenamento
+            window.location.href = "/storage";
         }
 
-        popup('{{venda}}');
+        // Chama a função popup com o valor da variável 'sale' passada pelo backend
+        popup('{{sale}}');
     </script>
-
-
 </body>
 
 </html>

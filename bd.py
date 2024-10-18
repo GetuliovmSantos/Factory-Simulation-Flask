@@ -73,67 +73,53 @@ class bd:
 
         return products
 
+    
+    def searchOneProduct(self, productID):
+        cursor = self.connection.cursor()
+        cursor.execute(f"select * from produtos where idProdutos = {productID}")
+        resultSelect = cursor.fetchall()
+        product = {}
+
+        if len(resultSelect) > 0:
+            product = {
+                "productID": resultSelect[0][0],
+                "productName": resultSelect[0][1],
+                "productQuantity": resultSelect[0][2],
+                "productBatch": resultSelect[0][3],
+                "productDate": resultSelect[0][4],
+                "productArea": resultSelect[0][5],
+            }
+        else:
+            product = {"error": True}
+
+        cursor.close()
+
+        return product
+
+
+    def sellProduct(self, productID, quantitySold, productDestination):
+        cursor = self.connection.cursor()
+
+        cursor.execute(
+            f"select quantidade from produtos where idProdutos = {productID}"
+        )
+        resultSelect = cursor.fetchall()
+        if int(quantitySold) > resultSelect[0][0]:
+            print("Quantidade insuficiente!")
+            return False
+
+        cursor.execute(
+            f"insert into vendas (quantidadeVenda, dataHora, destino, idProdutos) values ({quantitySold}, now(), '{productDestination}', {productID})"
+        )
+        cursor.execute(
+            f"update produtos set quantidade = quantidade - {quantitySold} where idProdutos = {productID}"
+        )
+        self.connection.commit()
+        cursor.close()
+
+        return True
+
     '''
-    def buscarProduto(self, idProduto):
-        conexao = criarConexao()
-        if conexao is None:
-            return "Erro de conexão"
-        else:
-            cursor = conexao.cursor()
-            cursor.execute(f"select * from produtos where idProdutos = {idProduto}")
-            resultado = cursor.fetchall()
-            produto = {}
-
-            if len(resultado) > 0:
-                produto = {
-                    "idProduto": resultado[0][0],
-                    "nome": resultado[0][1],
-                    "quantidade": resultado[0][2],
-                    "lote": resultado[0][3],
-                    "data": resultado[0][4],
-                    "area": resultado[0][5],
-                }
-            else:
-                produto = {"error": True}
-
-            cursor.close()
-            conexao.close()
-
-            print(produto)
-
-        return produto
-
-
-    def venderProduto(self, idProduto, quantidade, destino):
-        conexao = criarConexao()
-        if conexao is None:
-            return "Erro de conexão"
-        else:
-            cursor = conexao.cursor()
-
-            cursor.execute(
-                f"select quantidade from produtos where idProdutos = {idProduto}"
-            )
-            resultado = cursor.fetchall()
-            # verificar se a quantidade de produtos é suficiente
-            if int(quantidade) > resultado[0][0]:
-                print("Quantidade insuficiente!")
-                return False
-
-            cursor.execute(
-                f"insert into vendas (quantidadeVenda, dataHora, destino, idProdutos) values ({quantidade}, now(), '{destino}', {idProduto})"
-            )
-            cursor.execute(
-                f"update produtos set quantidade = quantidade - {quantidade} where idProdutos = {idProduto}"
-            )
-            print("Venda realizada com sucesso!")
-            conexao.commit()
-            cursor.close()
-            conexao.close()
-
-            return True
-
-
     def todosProdutos(self):
         conexao = criarConexao()
 

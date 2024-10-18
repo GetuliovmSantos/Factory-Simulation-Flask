@@ -47,7 +47,7 @@
                     {{products[i]["productDate"]}}</td>
                 <td
                     class="border border-slate-600 p-2 {{'bg-red-300' if (products[i]['productDate'] - date).days < 30 else 'bg-white'}}">
-                    <a href="/venda/{{i}}" class="bg-green-500 text-white py-1 px-2 rounded-md">Vender</a>
+                    <a href="/sale/{{i}}" class="bg-green-500 text-white py-1 px-2 rounded-md">Vender</a>
                 </td>
             </tr>
             {% endfor %}

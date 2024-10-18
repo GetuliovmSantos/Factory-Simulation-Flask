@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Venda</title>
+</head>
+
+<body class="bg-gray-400">
+    <!-- Seção superior da página de venda -->
+    <div id="superiorVenda" class="my-5 flex justify-center items-center flex-col">
+        <!-- Nome do produto -->
+        <h1 class="text-5xl text-center">{{product["productName"]}}</h1>
+        <!-- Quantidade do produto -->
+        <h2 class="text-3xl text-center">{{product["productQuantity"]}} unidades</h2>
+        <!-- Verificação se o produto está próximo da validade -->
+        {% if (product['productDate'] - date).days < 30 %} <h3 class="text-2xl text-center text-red-500">
+            Produto proximo a validade ou vencido({{product["productDate"]}})
+            </h3>
+            {% endif %}
+
+            <!-- Botão para voltar à área do produto -->
+            <div id="butaoArmazem" class="mt-10 flex justify-around w-1/2">
+                <a href="/area/{{product['productArea']}}"
+                    class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Voltar</a>
+            </div>
+    </div>
+
+    <!-- Seção de venda -->
+    <div id="venda" class="w-max m-auto px-20 py-5 bg-white ">
+        <form action="/sale/{{product['productID']}}/finish" method="POST"
+            class="flex justify-center items-center flex-col">
+            <!-- Campo para quantidade -->
+            <div class="flex flex-col  my-5">
+                <label for="quantity" class="text-xl font-bold">Quantidade</label>
+                <input type="number" name="quantity" id="quantity" class="border-2 border-gray-400 rounded-md p-2"
+                    required>
+            </div>
+            <!-- Campo para destino -->
+            <div class="flex flex-col  my-5">
+                <label for="destination" class="text-xl font-bold">Destino</label>
+                <input type="text" name="destination" id="destination" class="border-2 border-gray-400 rounded-md p-2"
+                    required>
+            </div>
+            <!-- Botão para finalizar a venda -->
+            <button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md mt-5">Vender</button>
+        </form>
+    </div>
+</body>
+
+</html>

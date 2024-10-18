@@ -43,7 +43,6 @@ def logout():
     return redirect("/")
 
 
-
 @aplication.route("/area/<int:area>")
 def areas(area):
     products = bd.searchProducts(area)
@@ -51,26 +50,27 @@ def areas(area):
         "area.html", products=products, area=area, date=datetime.now().date()
     )
 
-"""
-@aplication.route("/venda/<int:idProduto>")
-def venda(idProduto):
-    produto = buscarProduto(idProduto)
 
-    return render_template("venda.html", produto=produto, data=datetime.now().date())
+@aplication.route("/sale/<int:productID>")
+def venda(productID):
+    product = bd.searchOneProduct(productID)
+
+    return render_template("sale.html", product=product, date=datetime.now().date())
 
 
-@aplication.route("/venda/<int:idProduto>/finalizar", methods=["POST"])
-def finalizarVenda(idProduto):
-    quantidade = request.form["quantidade"]
-    destino = request.form["destino"]
+@aplication.route("/sale/<int:productID>/finish", methods=["POST"])
+def finalizarVenda(productID):
+    quantity = request.form["quantidade"]
+    destination = request.form["destino"]
 
-    resulto = venderProduto(idProduto, quantidade, destino)
-    if resulto is True:
-        return render_template("popup.html", venda=True)
+    saleResult = bd.sellProduct(productID, quantity, destination)
+    if saleResult is True:
+        return render_template("popup.html", sale=True)
     else:
-        return render_template("popup.html", venda=False)
+        return render_template("popup.html", sale=False)
 
 
+"""
 @aplication.route("/relatorio")
 def relatorio():
     produtos = todosProdutos()

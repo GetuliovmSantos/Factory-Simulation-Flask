@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+
 </head>
+
 <body>
     <script>
-        function popup(venda){
-            if(venda == 'True'){
+        function popup(venda) {
+            if (venda == 'True') {
                 alert("Venda realizada com sucesso");
                 // redirecionar para a pagina de armazem
                 window.location.href = "/armazem";
-            }else{
+            } else {
                 alert("Erro ao realizar a venda");
                 window.location.href = "/armazem";
             }
@@ -21,7 +23,8 @@
 
         popup('{{venda}}');
     </script>
-    
-    
+
+
 </body>
+
 </html>

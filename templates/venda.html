@@ -13,22 +13,24 @@
     <div id="superiorVenda" class="my-5 flex justify-center items-center flex-col">
         <h1 class="text-5xl text-center">{{produto["nome"]}}</h1>
         <h2 class="text-3xl text-center">{{produto["quantidade"]}} unidades</h2>
-        {% if (produto['data'] - data).days < 30 %}
-        <h3 class="text-2xl text-center text-red-500">
+        {% if (produto['data'] - data).days < 30 %} <h3 class="text-2xl text-center text-red-500">
             Produto proximo a validade ou vencido({{produto["data"]}})
-        </h3>
-        {% endif %}
-        
-        <div id="butaoArmazem" class="mt-10 flex justify-around w-1/2">
-            <a href="/area/{{produto['area']}}" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Voltar</a>
-        </div>
+            </h3>
+            {% endif %}
+
+            <div id="butaoArmazem" class="mt-10 flex justify-around w-1/2">
+                <a href="/area/{{produto['area']}}"
+                    class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Voltar</a>
+            </div>
     </div>
 
     <div id="venda" class="w-max m-auto px-20 py-5 bg-white ">
-        <form action="/venda/{{produto['idProduto']}}/finalizar" method="POST" class="flex justify-center items-center flex-col">
+        <form action="/venda/{{produto['idProduto']}}/finalizar" method="POST"
+            class="flex justify-center items-center flex-col">
             <div class="flex flex-col  my-5">
                 <label for="quantidade" class="text-xl font-bold">Quantidade</label>
-                <input type="number" name="quantidade" id="quantidade" class="border-2 border-gray-400 rounded-md p-2" required>
+                <input type="number" name="quantidade" id="quantidade" class="border-2 border-gray-400 rounded-md p-2"
+                    required>
             </div>
             <!-- destino -->
             <div class="flex flex-col  my-5">

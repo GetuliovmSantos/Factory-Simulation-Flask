@@ -9,9 +9,9 @@
 </head>
 
 <body class="bg-gray-400">
-    <div id="superior" class="my-5 flex justify-center items-center flex-col">
+    <div id="superiorArmazem" class="my-5 flex justify-center items-center flex-col">
         <h1 class="text-5xl text-center">Bem vindo {{user['nome']}}</h1>
-        <div id="butao" class="mt-10 flex justify-around w-1/2">
+        <div id="butaoArmazem" class="mt-10 flex justify-around w-1/2">
             {% if user['funcao'] == 'Gerente' %}
             <a href="/relatorio" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">Relatorios</a>
             <a href="/vendas" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md">Vendas</a>
@@ -19,8 +19,8 @@
             <a href="/logout" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Sair</a>
         </div>
     </div>
-    <div id="inferior" class="bg-white w-11/12 h-max m-auto flex flex-wrap">
-        {% for i in range(1, 6)%}
+    <div id="inferiorArmazem" class="bg-white w-11/12 h-max m-auto flex flex-wrap">
+        {% for i in range(1, 6) %}
         <a href="/area/{{i}}" class="w-max h-max p-20 m-5 bg-gray-100">
             <div id="id{{i}}">
                 Area {{i}}

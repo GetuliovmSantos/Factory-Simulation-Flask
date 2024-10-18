@@ -28,11 +28,20 @@
             </tr>
             {% for i in produtos %}
             <tr>
-                <td class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">{{produtos[i]["nome"]}}</td>
-                <td class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">{{produtos[i]["quantidade"]}}</td>
-                <td class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">{{produtos[i]["lote"]}}</td>
-                <td class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">{{produtos[i]["data"]}}</td>
-                <td class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
+                    {{produtos[i]["nome"]}}</td>
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
+                    {{produtos[i]["quantidade"]}}</td>
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
+                    {{produtos[i]["lote"]}}</td>
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
+                    {{produtos[i]["data"]}}</td>
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
                     <a href="/venda/{{i}}" class="bg-green-500 text-white py-1 px-2 rounded-md">Vender</a>
                 </td>
             </tr>

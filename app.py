@@ -1,51 +1,48 @@
 from flask import Flask, redirect, render_template, request
-from bd import (
-    login,
-    buscarProdutos,
-    buscarProduto,
-    venderProduto,
-    todosProdutos,
-    vendas,
-)
+from bd import bd
 from datetime import datetime
 
-app = Flask(__name__)
-user = {}
+aplication = Flask(__name__)
+userInformation = {}
+bd = bd()
 
 
-@app.route("/")
+@aplication.route("/")
 def index():
-    return render_template("login.html", erro=False)
-
-
-@app.route("/logar", methods=["POST"])
-def logar():
-    global user
-    usuario = request.form["id"]
-    senha = request.form["senha"]
-    print(usuario, senha)
-    user = login(usuario, senha)
-
-    if "error" in user:
-        return render_template("login.html", erro=True)
+    if "error" in f"{bd.connection}":
+        return render_template("errorConnection.html", errorBD=bd.connection)
     else:
-        return redirect("/armazem")
+        return render_template("index.html", error=False)
 
 
-@app.route("/armazem")
+@aplication.route("/logar", methods=["POST"])
+def logar():
+    global userInformation
+    userID = request.form["id"]
+    userPassword = request.form["senha"]
+    print(userID, userPassword)
+    userInformation = bd.login(userID, userPassword)
+
+    if "error" in userInformation:
+        return render_template("login.html", error=True)
+    else:
+        return redirect("/storage")
+
+
+'''@aplication.route("/armazem")
 def fabrica():
 
-    return render_template("armazem.html", user=user)
+    return render_template("armazem.html", user=userInformation)
 
 
-@app.route("/logout")
+@aplication.route("/logout")
 def logout():
     global user
     user = {}
     return redirect("/")
 
 
-@app.route("/area/<int:area>")
+@aplication.route("/area/<int:area>")
 def areas(area):
     produtos = buscarProdutos(area)
     return render_template(
@@ -53,14 +50,14 @@ def areas(area):
     )
 
 
-@app.route("/venda/<int:idProduto>")
+@aplication.route("/venda/<int:idProduto>")
 def venda(idProduto):
     produto = buscarProduto(idProduto)
 
     return render_template("venda.html", produto=produto, data=datetime.now().date())
 
 
-@app.route("/venda/<int:idProduto>/finalizar", methods=["POST"])
+@aplication.route("/venda/<int:idProduto>/finalizar", methods=["POST"])
 def finalizarVenda(idProduto):
     quantidade = request.form["quantidade"]
     destino = request.form["destino"]
@@ -72,7 +69,7 @@ def finalizarVenda(idProduto):
         return render_template("popup.html", venda=False)
 
 
-@app.route("/relatorio")
+@aplication.route("/relatorio")
 def relatorio():
     produtos = todosProdutos()
     return render_template(
@@ -80,11 +77,11 @@ def relatorio():
     )
 
 
-@app.route("/vendas")
+@aplication.route("/vendas")
 def relatorioVendas():
     produtosVendidos = vendas()
     return render_template("vendas.html", produtos=produtosVendidos)
-
+'''
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    aplication.run(debug=True)

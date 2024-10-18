@@ -60,8 +60,8 @@ def venda(productID):
 
 @aplication.route("/sale/<int:productID>/finish", methods=["POST"])
 def finalizarVenda(productID):
-    quantity = request.form["quantidade"]
-    destination = request.form["destino"]
+    quantity = request.form["quantity"]
+    destination = request.form["destination"]
 
     saleResult = bd.sellProduct(productID, quantity, destination)
     if saleResult is True:

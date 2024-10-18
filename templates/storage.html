@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <!-- Configurações de metadados e inclusão do Tailwind CSS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
@@ -9,17 +10,24 @@
 </head>
 
 <body class="bg-gray-400">
+    <!-- Seção superior do armazém -->
     <div id="superiorArmazem" class="my-5 flex justify-center items-center flex-col">
-        <h1 class="text-5xl text-center">Bem vindo {{user['nome']}}</h1>
+        <!-- Saudação ao usuário -->
+        <h1 class="text-5xl text-center">Bem vindo {{user['userName']}}</h1>
+        <!-- Botões de navegação -->
         <div id="butaoArmazem" class="mt-10 flex justify-around w-1/2">
-            {% if user['funcao'] == 'Gerente' %}
+            <!-- Exibe opções adicionais se o usuário for Gerente -->
+            {% if user['userFuction'] == 'Gerente' %}
             <a href="/relatorio" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">Relatorios</a>
             <a href="/vendas" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md">Vendas</a>
             {% endif %}
+            <!-- Botão de logout -->
             <a href="/logout" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Sair</a>
         </div>
     </div>
+    <!-- Seção inferior do armazém -->
     <div id="inferiorArmazem" class="bg-white w-11/12 h-max m-auto flex flex-wrap">
+        <!-- Links para diferentes áreas do armazém -->
         {% for i in range(1, 6) %}
         <a href="/area/{{i}}" class="w-max h-max p-20 m-5 bg-gray-100">
             <div id="id{{i}}">
@@ -29,3 +37,5 @@
         {% endfor %}
     </div>
 </body>
+
+</html>

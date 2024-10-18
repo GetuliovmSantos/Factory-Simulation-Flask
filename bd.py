@@ -9,8 +9,6 @@ from password import password
 class bd:
     def __init__(self):
         self.connection = self.createConnection()
-        if "error" not in f"{self.connection}":
-            self.cursor = self.connection.cursor()
 
     def createConnection(self):
         print("Conectando ao banco de dados...")
@@ -29,34 +27,31 @@ class bd:
             return {"error": erro}
 
 
-    '''def login(self, usuario, senha):
+    def login(self, userID, userPassword):
         user = {}
 
-        conexao = criarConexao()
-        if conexao is None:
-            return "Erro de conexão"
+        cursor = self.connection.cursor()
+ 
+        cursor.execute(
+            f"select * from usuarios where idUsuarios = {userID} and senha = {userPassword};"
+        )
+        resultado = cursor.fetchall()
+
+        if len(resultado) > 0:
+            user = {
+                "userId": resultado[0][0],
+                "userName": resultado[0][1],
+                "userFuction": resultado[0][2],
+                "userPassword": resultado[0][3],
+            }
         else:
-            cursor = conexao.cursor()
-            cursor.execute(
-                "select * from usuarios where idUsuarios = %s and senha = %s",
-                (usuario, senha),
-            )
-            resultado = cursor.fetchall()
-            if len(resultado) > 0:
-                user = {
-                    "idUsuarios": resultado[0][0],
-                    "nome": resultado[0][1],
-                    "funcao": resultado[0][2],
-                    "senha": resultado[0][3],
-                }
-            else:
-                user = {"error": True}
-            cursor.close()
-            conexao.close()
+            user = {"error": True}
+
+        cursor.close()
 
         return user
 
-
+    '''
     def buscarProdutos(self, area):
         conexao = criarConexao()
         if conexao is None:

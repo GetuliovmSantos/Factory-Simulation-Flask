@@ -18,8 +18,10 @@ def index():
 @aplication.route("/logar", methods=["POST"])
 def logar():
     global userInformation
+
     userID = request.form["id"]
-    userPassword = request.form["senha"]
+    userPassword = request.form["password"]
+
     print(userID, userPassword)
     userInformation = bd.login(userID, userPassword)
 
@@ -29,10 +31,9 @@ def logar():
         return redirect("/storage")
 
 
-'''@aplication.route("/armazem")
+@aplication.route("/storage")
 def fabrica():
-
-    return render_template("armazem.html", user=userInformation)
+    return render_template("storage.html", user=userInformation)
 
 
 @aplication.route("/logout")
@@ -42,6 +43,7 @@ def logout():
     return redirect("/")
 
 
+"""
 @aplication.route("/area/<int:area>")
 def areas(area):
     produtos = buscarProdutos(area)
@@ -81,7 +83,7 @@ def relatorio():
 def relatorioVendas():
     produtosVendidos = vendas()
     return render_template("vendas.html", produtos=produtosVendidos)
-'''
+"""
 
 if __name__ == "__main__":
     aplication.run(debug=True)

@@ -24,9 +24,6 @@ def criarConexao():
         return None
 
 
-print(criarConexao())
-
-
 def login(usuario, senha):
     user = {}
 
@@ -140,3 +137,64 @@ def venderProduto(idProduto, quantidade, destino):
         conexao.close()
 
         return True
+
+
+def todosProdutos():
+    conexao = criarConexao()
+
+    if conexao is None:
+        return "Erro de conexão"
+    else:
+        cursor = conexao.cursor()
+        cursor.execute("select * from produtos")
+        resultado = cursor.fetchall()
+        produtos = {}
+
+        if len(resultado) > 0:
+            for i in range(len(resultado)):
+                produtos[resultado[i][0]] = {
+                    "nome": resultado[i][1],
+                    "quantidade": resultado[i][2],
+                    "lote": resultado[i][3],
+                    "data": resultado[i][4],
+                    "area": resultado[i][5],
+                }
+        else:
+            produtos = {"error": True}
+
+        cursor.close()
+        conexao.close()
+
+        return produtos
+
+
+def vendas():
+    conexao = criarConexao()
+
+    if conexao is None:
+        return "Erro de conexão"
+    else:
+        cursor = conexao.cursor()
+        cursor.execute("select * from vendas")
+        resultado = cursor.fetchall()
+        vendas = {}
+
+        if len(resultado) > 0:
+            for i in range(len(resultado)):
+                cursor.execute(
+                    f"select nomeProduto from produtos where idProdutos = {resultado[i][4]}"
+                )
+                nomeProduto = cursor.fetchall()
+                vendas[resultado[i][0]] = {
+                    "quantidade": resultado[i][1],
+                    "dataHora": resultado[i][2],
+                    "destino": resultado[i][3],
+                    "nomeProduto": nomeProduto[0][0],
+                }
+        else:
+            vendas = {"error": True}
+
+        cursor.close()
+        conexao.close()
+
+        return vendas

@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Vendas</title>
+</head>
+
+<body class="bg-gray-400">
+    <div id="superiorArea" class="my-5 flex justify-center items-center flex-col">
+        <h1 class="text-5xl text-center">Vendas</h1>
+        <div id="butaoArmazem" class="mt-10 flex
+            justify-around w-1/2">
+            <a href="/armazem" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Voltar</a>
+        </div>
+    </div>
+    <div id="listaPrdutos" class="w-max m-auto px-20 py-5 bg-white ">
+        <table class="table-auto border-collapse border border-slate-500">
+            <tr>
+                <th class="border border-slate-600 p-2 bg-gray-200">Nome</th>
+                <th class="border border-slate-600 p-2 bg-gray-200">Quantidade</th>
+                <th class="border border-slate-600 p-2 bg-gray-200">Data / Hora</th>
+                <th class="border border-slate-600 p-2 bg-gray-200">Destino</th>
+            </tr>
+            {% for i in produtos %}
+            <tr>
+                <td class="border border-slate-600 p-2">
+                    {{produtos[i]["nomeProduto"]}}</td>
+                <td class="border border-slate-600 p-2">
+                    {{produtos[i]["quantidade"]}}</td>
+                <td class="border border-slate-600 p-2">
+                    {{produtos[i]["dataHora"]}}</td>
+                <td class="border border-slate-600 p-2">
+                    {{produtos[i]["destino"]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+</body>
+
+</html>

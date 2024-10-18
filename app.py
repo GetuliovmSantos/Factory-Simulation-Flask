@@ -1,5 +1,12 @@
 from flask import Flask, redirect, render_template, request
-from bd import login, buscarProdutos, buscarProduto, venderProduto
+from bd import (
+    login,
+    buscarProdutos,
+    buscarProduto,
+    venderProduto,
+    todosProdutos,
+    vendas,
+)
 from datetime import datetime
 
 app = Flask(__name__)
@@ -63,6 +70,20 @@ def finalizarVenda(idProduto):
         return render_template("popup.html", venda=True)
     else:
         return render_template("popup.html", venda=False)
+
+
+@app.route("/relatorio")
+def relatorio():
+    produtos = todosProdutos()
+    return render_template(
+        "relatorio.html", produtos=produtos, data=datetime.now().date()
+    )
+
+
+@app.route("/vendas")
+def relatorioVendas():
+    produtosVendidos = vendas()
+    return render_template("vendas.html", produtos=produtosVendidos)
 
 
 if __name__ == "__main__":

@@ -4,50 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./output.css" rel="stylesheet">
+    <!-- Script para carregar o Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Area</title>
 </head>
 
 <body class="bg-gray-400">
+    <!-- Área superior com título e botão de voltar -->
     <div id="superiorArea" class="my-5 flex justify-center items-center flex-col">
         <h1 class="text-5xl text-center">Area {{area}}</h1>
         <div id="butaoArmazem" class="mt-10 flex justify-around w-1/2">
-            <a href="/armazem" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Voltar</a>
+            <a href="/storage" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Voltar</a>
         </div>
     </div>
 
+    <!-- Lista de produtos -->
     <div id="listaPrdutos" class="w-max m-auto px-20 py-5 bg-white ">
         <table class="table-auto border-collapse border border-slate-500">
             <tr>
+                <!-- Cabeçalhos da tabela -->
                 <th class="border border-slate-600 p-2 bg-gray-200">Nome</th>
                 <th class="border border-slate-600 p-2 bg-gray-200">Quantidade</th>
                 <th class="border border-slate-600 p-2 bg-gray-200">Lote</th>
                 <th class="border border-slate-600 p-2 bg-gray-200">Data</th>
                 <th class="border border-slate-600 p-2 bg-gray-200">-</th>
             </tr>
-            {% for i in produtos %}
+            <!-- Loop para exibir os produtos -->
+            {% for i in products %}
             <tr>
+                <!-- Colunas da tabela com verificação de data para aplicar cor de fundo -->
                 <td
-                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
-                    {{produtos[i]["nome"]}}</td>
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (products[i]['productDate'] - date).days < 30 else 'bg-white'}}">
+                    {{products[i]["productName"]}}</td>
                 <td
-                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
-                    {{produtos[i]["quantidade"]}}</td>
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (products[i]['productDate'] - date).days < 30 else 'bg-white'}}">
+                    {{products[i]["productQuantity"]}}</td>
                 <td
-                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
-                    {{produtos[i]["lote"]}}</td>
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (products[i]['productDate'] - date).days < 30 else 'bg-white'}}">
+                    {{products[i]["productBatch"]}}</td>
                 <td
-                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
-                    {{produtos[i]["data"]}}</td>
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (products[i]['productDate'] - date).days < 30 else 'bg-white'}}">
+                    {{products[i]["productDate"]}}</td>
                 <td
-                    class="border border-slate-600 p-2 {{'bg-red-300' if (produtos[i]['data'] - data).days < 30 else 'bg-white'}}">
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (products[i]['productDate'] - date).days < 30 else 'bg-white'}}">
                     <a href="/venda/{{i}}" class="bg-green-500 text-white py-1 px-2 rounded-md">Vender</a>
                 </td>
             </tr>
             {% endfor %}
         </table>
-
     </div>
 </body>
 

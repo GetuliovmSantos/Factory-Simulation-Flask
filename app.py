@@ -43,15 +43,15 @@ def logout():
     return redirect("/")
 
 
-"""
+
 @aplication.route("/area/<int:area>")
 def areas(area):
-    produtos = buscarProdutos(area)
+    products = bd.searchProducts(area)
     return render_template(
-        "area.html", produtos=produtos, area=area, data=datetime.now().date()
+        "area.html", products=products, area=area, date=datetime.now().date()
     )
 
-
+"""
 @aplication.route("/venda/<int:idProduto>")
 def venda(idProduto):
     produto = buscarProduto(idProduto)

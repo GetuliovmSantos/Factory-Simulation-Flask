@@ -51,34 +51,29 @@ class bd:
 
         return user
 
-    '''
-    def buscarProdutos(self, area):
-        conexao = criarConexao()
-        if conexao is None:
-            return "Erro de conexão"
+    
+    def searchProducts(self, area):
+        cursor = self.connection.cursor()
+        cursor.execute(f"select * from produtos where area = {area}")
+        resultSelect = cursor.fetchall()
+        products = {}
+
+        if len(resultSelect) > 0:
+            for i in range(len(resultSelect)):
+                products[resultSelect[i][0]] = {
+                    "productName": resultSelect[i][1],
+                    "productQuantity": resultSelect[i][2],
+                    "productBatch": resultSelect[i][3],
+                    "productDate": resultSelect[i][4],
+                }
         else:
-            cursor = conexao.cursor()
-            cursor.execute(f"select * from produtos where area = {area}")
-            resultado = cursor.fetchall()
-            produtos = {}
+            products = {"error": True}
 
-            if len(resultado) > 0:
-                for i in range(len(resultado)):
-                    produtos[resultado[i][0]] = {
-                        "nome": resultado[i][1],
-                        "quantidade": resultado[i][2],
-                        "lote": resultado[i][3],
-                        "data": resultado[i][4],
-                    }
-            else:
-                produtos = {"error": True}
+        cursor.close()
 
-            cursor.close()
-            conexao.close()
+        return products
 
-        return produtos
-
-
+    '''
     def buscarProduto(self, idProduto):
         conexao = criarConexao()
         if conexao is None:

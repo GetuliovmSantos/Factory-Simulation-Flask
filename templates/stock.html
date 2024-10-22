@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+
+<head>
+    <!-- Define a codificação de caracteres para o documento -->
+    <meta charset="UTF-8">
+    <!-- Configura a viewport para garantir que a página seja renderizada corretamente em dispositivos móveis -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Importa o Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Define o título da página -->
+    <title>Estoque</title>
+</head>
+
+<body class="bg-gray-400">
+    <!-- Área superior da página com título e botão -->
+    <div id="superiorArea" class="my-5 flex justify-center items-center flex-col">
+        <!-- Título principal da página -->
+        <h1 class="text-5xl text-center">Relatorio</h1>
+        <!-- Botão para voltar à página de armazenamento -->
+        <div id="butaoArmazem" class="mt-10 flex justify-around w-1/2">
+            <a href="/storage" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Voltar</a>
+        </div>
+    </div>
+    <!-- Área da lista de produtos -->
+    <div id="listaPrdutos" class="w-max m-auto px-20 py-5 bg-white ">
+        <!-- Tabela para exibir os produtos -->
+        <table class="table-auto border-collapse border border-slate-500">
+            <!-- Cabeçalho da tabela -->
+            <tr>
+                <th class="border border-slate-600 p-2 bg-gray-200">Nome</th>
+                <th class="border border-slate-600 p-2 bg-gray-200">Quantidade</th>
+                <th class="border border-slate-600 p-2 bg-gray-200">Lote</th>
+                <th class="border border-slate-600 p-2 bg-gray-200">Data</th>
+            </tr>
+            <!-- Loop para exibir cada produto na tabela -->
+            {% for i in allProducts %}
+            <tr>
+                <!-- Nome do produto, com cor de fundo condicional -->
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (allProducts[i]['productDate'] - date).days < 30 else 'bg-white'}}">
+                    {{allProducts[i]["productName"]}}</td>
+                <!-- Quantidade do produto, com cor de fundo condicional -->
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (allProducts[i]['productDate'] - date).days < 30 else 'bg-white'}}">
+                    {{allProducts[i]["productQuantity"]}}</td>
+                <!-- Lote do produto, com cor de fundo condicional -->
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (allProducts[i]['productDate'] - date).days < 30 else 'bg-white'}}">
+                    {{allProducts[i]["productBatch"]}}</td>
+                <!-- Data do produto, com cor de fundo condicional -->
+                <td
+                    class="border border-slate-600 p-2 {{'bg-red-300' if (allProducts[i]['productDate'] - date).days < 30 else 'bg-white'}}">
+                    {{allProducts[i]["productDate"]}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</body>
+
+</html>

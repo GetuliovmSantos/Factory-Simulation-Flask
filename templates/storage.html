@@ -18,8 +18,9 @@
         <div id="butaoArmazem" class="mt-10 flex justify-around w-1/2">
             <!-- Exibe opções adicionais se o usuário for Gerente -->
             {% if user['userFuction'] == 'Gerente' %}
-            <a href="/-" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">Relatorios</a>
-            <a href="/-" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md">Vendas</a>
+            <a href="/stock" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md">Estoque</a>
+            <a href="/salesReport" class="bg-green-500 text-white font-bold py-2 px-4 rounded-md">Relatorio de
+                Vendas</a>
             {% endif %}
             <!-- Botão de logout -->
             <a href="/logout" class="bg-red-500 text-white font-bold py-2 px-4 rounded-md">Sair</a>

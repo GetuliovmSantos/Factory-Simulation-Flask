@@ -6,6 +6,7 @@ import mysql.connector.errors
 
 from password import password
 
+
 class bd:
     def __init__(self):
         self.connection = self.createConnection()
@@ -26,12 +27,11 @@ class bd:
             print("Erro de conexão: ", erro)
             return {"error": erro}
 
-
     def login(self, userID, userPassword):
         user = {}
 
         cursor = self.connection.cursor()
- 
+
         cursor.execute(
             f"select * from usuarios where idUsuarios = {userID} and senha = {userPassword};"
         )
@@ -51,7 +51,6 @@ class bd:
 
         return user
 
-    
     def searchProducts(self, area):
         cursor = self.connection.cursor()
         cursor.execute(f"select * from produtos where area = {area}")
@@ -73,7 +72,6 @@ class bd:
 
         return products
 
-    
     def searchOneProduct(self, productID):
         cursor = self.connection.cursor()
         cursor.execute(f"select * from produtos where idProdutos = {productID}")
@@ -95,7 +93,6 @@ class bd:
         cursor.close()
 
         return product
-
 
     def sellProduct(self, productID, quantitySold, productDestination):
         cursor = self.connection.cursor()
@@ -119,64 +116,49 @@ class bd:
 
         return True
 
-    '''
-    def todosProdutos(self):
-        conexao = criarConexao()
+    def allProducts(self):
+        cursor = self.connection.cursor()
+        cursor.execute("select * from produtos")
+        resultSelect = cursor.fetchall()
+        allProducts = {}
 
-        if conexao is None:
-            return "Erro de conexão"
+        if len(resultSelect) > 0:
+            for i in range(len(resultSelect)):
+                allProducts[resultSelect[i][0]] = {
+                    "productName": resultSelect[i][1],
+                    "productQuantity": resultSelect[i][2],
+                    "productBatch": resultSelect[i][3],
+                    "productDate": resultSelect[i][4],
+                    "productArea": resultSelect[i][5],
+                }
         else:
-            cursor = conexao.cursor()
-            cursor.execute("select * from produtos")
-            resultado = cursor.fetchall()
-            produtos = {}
+            allProducts = {"error": True}
 
-            if len(resultado) > 0:
-                for i in range(len(resultado)):
-                    produtos[resultado[i][0]] = {
-                        "nome": resultado[i][1],
-                        "quantidade": resultado[i][2],
-                        "lote": resultado[i][3],
-                        "data": resultado[i][4],
-                        "area": resultado[i][5],
-                    }
-            else:
-                produtos = {"error": True}
+        cursor.close()
 
-            cursor.close()
-            conexao.close()
+        return allProducts
 
-            return produtos
+    def sales(self):
+        cursor = self.connection.cursor()
+        cursor.execute("select * from vendas")
+        resultSelect = cursor.fetchall()
+        sales = {}
 
-
-    def vendas(self):
-        conexao = criarConexao()
-
-        if conexao is None:
-            return "Erro de conexão"
+        if len(resultSelect) > 0:
+            for i in range(len(resultSelect)):
+                cursor.execute(
+                    f"select nomeProduto from produtos where idProdutos = {resultSelect[i][4]}"
+                )
+                productName = cursor.fetchall()
+                sales[resultSelect[i][0]] = {
+                    "saleQuantity": resultSelect[i][1],
+                    "dateTime": resultSelect[i][2],
+                    "productDestination": resultSelect[i][3],
+                    "productName": productName[0][0],
+                }
         else:
-            cursor = conexao.cursor()
-            cursor.execute("select * from vendas")
-            resultado = cursor.fetchall()
-            vendas = {}
+            sales = {"error": True}
 
-            if len(resultado) > 0:
-                for i in range(len(resultado)):
-                    cursor.execute(
-                        f"select nomeProduto from produtos where idProdutos = {resultado[i][4]}"
-                    )
-                    nomeProduto = cursor.fetchall()
-                    vendas[resultado[i][0]] = {
-                        "quantidade": resultado[i][1],
-                        "dataHora": resultado[i][2],
-                        "destino": resultado[i][3],
-                        "nomeProduto": nomeProduto[0][0],
-                    }
-            else:
-                vendas = {"error": True}
+        cursor.close()
 
-            cursor.close()
-            conexao.close()
-
-            return vendas
-'''
+        return sales

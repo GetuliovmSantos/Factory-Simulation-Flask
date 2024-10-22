@@ -1,0 +1,51 @@
+idProdutos,nomeProduto,quantidade,lote,dataValidade,area
+1,Televisão,53,1,2024-10-13,3
+2,Geladeira,37,84,2024-12-03,2
+3,Notebook,94,38,2024-12-22,5
+4,Smartphone,21,48,2024-11-06,5
+5,"Máquina de lavar",81,97,2025-01-08,4
+6,Micro-ondas,68,55,2024-11-22,4
+7,Fogão,51,32,2025-03-01,3
+8,"Aspirador de pó",40,68,2025-04-21,2
+9,Liquidificador,51,20,2024-10-18,3
+10,Cafeteira,86,7,2024-10-11,4
+11,"Ferro de passar",34,93,2025-03-15,4
+12,Ventilador,99,17,2024-12-18,2
+13,Ar-condicionado,43,57,2025-03-11,3
+14,"Secador de cabelo",46,63,2025-02-25,4
+15,Tablet,44,82,2025-02-15,2
+16,Impressora,34,2,2025-01-23,1
+17,Roteador,10,67,2025-02-19,3
+18,"Fone de ouvido",36,70,2025-03-14,1
+19,Smartwatch,30,28,2024-12-12,5
+20,"Câmera digital",28,82,2025-04-14,5
+21,"Console de videogame",53,45,2025-01-15,5
+22,Monitor,19,84,2025-04-10,5
+23,Teclado,69,55,2024-11-20,4
+24,Mouse,96,30,2025-01-01,2
+25,"Caixa de som",23,22,2025-01-10,3
+26,Drone,86,63,2024-10-19,3
+27,Bicicleta,5,82,2025-01-10,1
+28,"Patinete elétrico",46,69,2024-12-31,3
+29,"Tênis de corrida",3,80,2024-11-04,4
+30,Mochila,58,25,2025-04-21,4
+31,"Relógio de pulso",8,93,2025-02-18,5
+32,"Óculos de sol",25,62,2025-01-04,3
+33,Perfume,56,56,2024-12-06,3
+34,Livro,40,56,2025-01-02,1
+35,Caderno,33,40,2025-02-10,5
+36,Caneta,48,27,2024-12-08,4
+37,"Lâmpada inteligente",65,64,2024-11-10,5
+38,"Carregador portátil",81,92,2024-11-21,3
+39,Batedeira,17,70,2025-02-07,4
+40,"Panela elétrica",61,51,2025-04-11,5
+41,"Grill elétrico",68,58,2025-03-05,2
+42,"Máquina de costura",13,59,2025-03-30,1
+43,"Cortador de grama",31,71,2024-12-02,2
+44,"Churrasqueira elétrica",38,59,2024-11-07,3
+45,"Aparelho de som",24,1,2025-04-09,1
+46,"DVD player",71,82,2024-12-27,3
+47,"Blu-ray player",20,94,2025-02-12,1
+48,Projetor,84,6,2025-01-04,5
+49,Scanner,81,46,2024-11-22,3
+50,Calculadora,91,90,2025-04-09,2
